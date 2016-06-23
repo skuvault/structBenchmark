@@ -122,12 +122,13 @@ namespace StructBenchmark
 
     public class GCStats
     {
-        private long _memory;
+        private long _memoryBefore;
+        private long _memoryAfter;
         private long[] _gcCount = new long[ 3 ];
 
         public void StartGathering()
         {
-            _memory = GC.GetTotalMemory( true );
+            _memoryBefore = GC.GetTotalMemory( true );
             for( var i = 0; i <= GC.MaxGeneration; i++ )
             {
                 this._gcCount[ i ] = GC.CollectionCount( i );
@@ -136,16 +137,17 @@ namespace StructBenchmark
 
         public void StopGathering()
         {
-            for( var i = 0; i <= GC.MaxGeneration; i++ )
+            this._memoryAfter = GC.GetTotalMemory(true);
+            for ( var i = 0; i <= GC.MaxGeneration; i++ )
             {
                 this._gcCount[ i ] = GC.CollectionCount( i ) - this._gcCount[ i ];
             }
-            this._memory = GC.GetTotalMemory( true );
+            this._memoryAfter = GC.GetTotalMemory( true );
         }
 
         public void PrintStats()
         {
-            Console.WriteLine( "Mem: {0}MB; GC 0 - {1}; GC 1 - {2}; GC 2 - {3}", this._memory / 1024 / 1024, this._gcCount[ 0 ], this._gcCount[ 1 ], this._gcCount[ 2 ] );
+            Console.WriteLine( "Mem before: {0}KB; Mem after: {1}KB; GC 0 - {2}; GC 1 - {3}; GC 2 - {4}", this._memoryBefore / 1024, this._memoryAfter / 1024, this._gcCount[ 0 ], this._gcCount[ 1 ], this._gcCount[ 2 ] );
         }
     }
 
@@ -155,6 +157,11 @@ namespace StructBenchmark
         private const int copyCount = 10;
         private static long _accumulator;
 
+        private static void ReportMemory()
+        {
+            Console.WriteLine("Memory Consumed - {0}MB", GC.GetTotalMemory(false) / 1024d / 1024d);
+        }
+
         public static void Measure( string name, Action act )
         {
             var gcStats = new GCStats();
@@ -163,12 +170,12 @@ namespace StructBenchmark
             var sw = Stopwatch.StartNew();
             act();
             sw.Stop();
-            Console.WriteLine();
             Console.WriteLine( "Accumulator - " + _accumulator );
             Console.WriteLine( "Measured '{0}' - {1}ms", name, sw.ElapsedMilliseconds );
 
             gcStats.StopGathering();
             gcStats.PrintStats();
+            Console.WriteLine();
         }
 
         private static void TestStruct()
@@ -191,6 +198,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -214,6 +222,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -237,6 +246,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -260,6 +270,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -283,6 +294,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -306,6 +318,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -329,6 +342,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -352,6 +366,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.XY.X + d.XY.Y + d.Z;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -375,6 +390,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.XY.X + d.XY.Y + d.Z;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -407,6 +423,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -439,6 +456,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -471,6 +489,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -503,6 +522,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
@@ -535,6 +555,7 @@ namespace StructBenchmark
                 var d = data[i];
                 accumulator += d.X + d.Y;
             }
+            ReportMemory();
             _accumulator = accumulator;
         }
 
