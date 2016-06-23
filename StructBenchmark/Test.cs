@@ -152,6 +152,7 @@ namespace StructBenchmark
     public static class CSharpTest
     {
         private const int iterations = 10 * 1000 * 1000;
+        private const int copyCount = 10;
         private static long _accumulator;
 
         public static void Measure( string name, Action act )
@@ -387,9 +388,12 @@ namespace StructBenchmark
                 di[i] = new PointStruct(i, i + 1);
             }
 
-            for (var i = 0; i < iterations; i++)
+            for (var z = 0; z < copyCount; z++)
             {
-                data[i] = di[i];
+                for (var i = 0; i < iterations; i++)
+                {
+                    data[i] = di[i];
+                }
             }
 
             long accumulator = 0;
@@ -416,9 +420,12 @@ namespace StructBenchmark
                 di[i] = new Point3Struct(i, i + 1, i + 2);
             }
 
-            for (var i = 0; i < iterations; i++)
+            for (var z = 0; z < copyCount; z++)
             {
-                data[i] = di[i];
+                for (var i = 0; i < iterations; i++)
+                {
+                    data[i] = di[i];
+                }
             }
 
             long accumulator = 0;
@@ -445,9 +452,12 @@ namespace StructBenchmark
                 di[i] = new Point4Struct(i, i + 1, i + 2, i + 3);
             }
 
-            for (var i = 0; i < iterations; i++)
+            for (var z = 0; z < copyCount; z++)
             {
-                data[i] = di[i];
+                for (var i = 0; i < iterations; i++)
+                {
+                    data[i] = di[i];
+                }
             }
 
             long accumulator = 0;
@@ -474,9 +484,12 @@ namespace StructBenchmark
                 di[i] = new Point8Struct(i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7);
             }
 
-            for (var i = 0; i < iterations; i++)
+            for (var z = 0; z < copyCount; z++)
             {
-                data[i] = di[i];
+                for (var i = 0; i < iterations; i++)
+                {
+                    data[i] = di[i];
+                }
             }
 
             long accumulator = 0;
@@ -503,10 +516,14 @@ namespace StructBenchmark
                 di[i] = new PointClass(i, i + 1);
             }
 
-            for (var i = 0; i < iterations; i++)
+            for (var z = 0; z < copyCount; z++)
             {
-                data[i] = di[i];
+                for (var i = 0; i < iterations; i++)
+                {
+                    data[i] = di[i];
+                }
             }
+
             long accumulator = 0;
             for (var i = 0; i < iterations; i++)
             {
