@@ -185,6 +185,11 @@ namespace StructBenchmark
                 var d = data[ i ];
                 accumulator += d.X + d.Y;
             }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y;
+            }
             _accumulator = accumulator;
         }
 
@@ -201,6 +206,11 @@ namespace StructBenchmark
             for( var i = 0; i < iterations; i++ )
             {
                 var d = data[ i ];
+                accumulator += d.X + d.Y;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
                 accumulator += d.X + d.Y;
             }
             _accumulator = accumulator;
@@ -221,6 +231,11 @@ namespace StructBenchmark
                 var d = data[ i ];
                 accumulator += d.X + d.Y + d.Z;
             }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z;
+            }
             _accumulator = accumulator;
         }
 
@@ -237,6 +252,11 @@ namespace StructBenchmark
             for( var i = 0; i < iterations; i++ )
             {
                 var d = data[ i ];
+                accumulator += d.X + d.Y + d.Z;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
                 accumulator += d.X + d.Y + d.Z;
             }
             _accumulator = accumulator;
@@ -257,6 +277,11 @@ namespace StructBenchmark
                 var d = data[ i ];
                 accumulator += d.X + d.Y + d.Z + d.A;
             }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A;
+            }
             _accumulator = accumulator;
         }
 
@@ -273,6 +298,11 @@ namespace StructBenchmark
             for( var i = 0; i < iterations; i++ )
             {
                 var d = data[ i ];
+                accumulator += d.X + d.Y + d.Z + d.A;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
                 accumulator += d.X + d.Y + d.Z + d.A;
             }
             _accumulator = accumulator;
@@ -293,6 +323,11 @@ namespace StructBenchmark
                 var d = data[ i ];
                 accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
             }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
+            }
             _accumulator = accumulator;
         }
 
@@ -309,6 +344,11 @@ namespace StructBenchmark
             for( var i = 0; i < iterations; i++ )
             {
                 var d = data[ i ];
+                accumulator += d.XY.X + d.XY.Y + d.Z;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
                 accumulator += d.XY.X + d.XY.Y + d.Z;
             }
             _accumulator = accumulator;
@@ -329,6 +369,155 @@ namespace StructBenchmark
                 var d = data[ i ];
                 accumulator += d.XY.X + d.XY.Y + d.Z;
             }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.XY.X + d.XY.Y + d.Z;
+            }
+            _accumulator = accumulator;
+        }
+
+        private static void CopyStruct2Test()
+        {
+            var di = new PointStruct[iterations];
+            var data = new PointStruct[iterations];
+
+            for (var i = 0; i < iterations; i++)
+            {
+                di[i] = new PointStruct(i, i + 1);
+            }
+
+            for (var i = 0; i < iterations; i++)
+            {
+                data[i] = di[i];
+            }
+
+            long accumulator = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y;
+            }
+            _accumulator = accumulator;
+        }
+
+        private static void CopyStruct3Test()
+        {
+            var di = new Point3Struct[iterations];
+            var data = new Point3Struct[iterations];
+
+            for (var i = 0; i < iterations; i++)
+            {
+                di[i] = new Point3Struct(i, i + 1, i + 2);
+            }
+
+            for (var i = 0; i < iterations; i++)
+            {
+                data[i] = di[i];
+            }
+
+            long accumulator = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z;
+            }
+            _accumulator = accumulator;
+        }
+
+        private static void CopyStruct4Test()
+        {
+            var di = new Point4Struct[iterations];
+            var data = new Point4Struct[iterations];
+
+            for (var i = 0; i < iterations; i++)
+            {
+                di[i] = new Point4Struct(i, i + 1, i + 2, i + 3);
+            }
+
+            for (var i = 0; i < iterations; i++)
+            {
+                data[i] = di[i];
+            }
+
+            long accumulator = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A;
+            }
+            _accumulator = accumulator;
+        }
+
+        private static void CopyStruct8Test()
+        {
+            var di = new Point8Struct[iterations];
+            var data = new Point8Struct[iterations];
+
+            for (var i = 0; i < iterations; i++)
+            {
+                di[i] = new Point8Struct(i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7);
+            }
+
+            for (var i = 0; i < iterations; i++)
+            {
+                data[i] = di[i];
+            }
+
+            long accumulator = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y + d.Z + d.A + d.B + d.C + d.D + d.E;
+            }
+            _accumulator = accumulator;
+        }
+
+        private static void CopyClassTest()
+        {
+            var di = new PointClass[iterations];
+            var data = new PointClass[iterations];
+
+            for (var i = 0; i < iterations; i++)
+            {
+                di[i] = new PointClass(i, i + 1);
+            }
+
+            for (var i = 0; i < iterations; i++)
+            {
+                data[i] = di[i];
+            }
+            long accumulator = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y;
+            }
+            for (var i = 0; i < iterations; i++)
+            {
+                var d = data[i];
+                accumulator += d.X + d.Y;
+            }
             _accumulator = accumulator;
         }
 
@@ -347,6 +536,11 @@ namespace StructBenchmark
                 Measure( "Point Struct 8", Test8Struct );
                 Measure( "Point Struct 3 Ref 1", Test3StructRef );
                 Measure( "Point Class 3 Ref 1", Test3ClassRef );
+                Measure( "Copy Struct 2", CopyStruct2Test );
+                Measure( "Copy Struct 3", CopyStruct3Test );
+                Measure( "Copy Struct 4", CopyStruct4Test );
+                Measure( "Copy Struct 8", CopyStruct8Test );
+                Measure( "Copy Class 2", CopyClassTest );
             }
         }
     }
